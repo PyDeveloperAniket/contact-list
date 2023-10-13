@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Home = () => {
-
+    // Accessing contacts from Redux store
     const contacts = useSelector(state => state);
 
+    // Redux dispatch hook
     const dispatch = useDispatch();
 
+    // Function to delete a contact
     const deleteContact = (id) => {
         dispatch({ type: 'DELETE_CONTACT', payload: id });
         toast.success('Contact deleted successfully!');
     }
 
+    // JSX structure for the Home component
     return (
         <div className='container'>
             <div className='row'>
@@ -41,7 +44,10 @@ const Home = () => {
                                         <td>{contact.email}</td>
                                         <td>{contact.number}</td>
                                         <td>
+                                            {/* Link to edit page */}
                                             <Link to={`/edit/${contact.id}`} className='btn btn-small btn-primary me-2'>Edit</Link>
+                                            
+                                            {/* Button to delete a contact */}
                                             <button type='button' onClick={() => deleteContact(contact.id)} className='btn btn-small btn-danger'>Delete</button>
                                         </td>
                                     </tr>
